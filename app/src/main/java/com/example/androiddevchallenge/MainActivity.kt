@@ -21,6 +21,8 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -35,9 +37,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -83,16 +87,7 @@ fun TimerApp(mainViewModel: MainViewModel) {
 
         Column {
 
-            Text(
-                text = "Timer",
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.h4.copy(
-                    fontWeight = FontWeight.Bold
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            )
+            NameBar()
 
             AnimatedVisibility(!timerRunning.value) {
                 TimeInputUI(
@@ -137,6 +132,33 @@ fun TimerApp(mainViewModel: MainViewModel) {
                 isTimerRunning = timerRunning.value
             )
         }
+    }
+}
+
+@Composable
+fun NameBar(
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+
+        Image(
+            painter = painterResource(id = R.mipmap.ic_launcher_foreground),
+            contentDescription = "App icon"
+        )
+
+        Text(
+            text = LocalContext.current.getString(R.string.app_name),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.h4.copy(
+                fontWeight = FontWeight.Bold
+            )
+        )
     }
 }
 

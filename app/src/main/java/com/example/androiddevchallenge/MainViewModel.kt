@@ -23,7 +23,7 @@ import androidx.lifecycle.ViewModel
 class MainViewModel : ViewModel() {
 
     private val _hours = MutableLiveData(0L)
-    private val _minutes = MutableLiveData(0L)
+    private val _minutes = MutableLiveData(10L)
     private val _seconds = MutableLiveData(0L)
 
     private val _isTimerRunning = MutableLiveData(false)
