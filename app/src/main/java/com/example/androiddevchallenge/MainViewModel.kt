@@ -93,7 +93,9 @@ class MainViewModel : ViewModel() {
     private fun startTimer(onTimerFinished: () -> Unit) {
         saveCurrentTime()
         val finalSeconds = (seconds.value ?: 0L) + ((minutes.value ?: 0L) * 60) + ((hours.value ?: 0L) * 60 * 60)
-        startTimer(finalSeconds, onTimerFinished)
+        startTimer(finalSeconds) {
+            onTimerFinished()
+        }
     }
 
     private fun stopTimer() {
